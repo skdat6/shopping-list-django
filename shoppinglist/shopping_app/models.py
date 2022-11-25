@@ -24,3 +24,12 @@ class Item(models.Model):
 
     def __str__(self):
         return self.item_name
+
+
+class User(models.Model):
+    first_name = models.CharField(max_length=264)
+    last_name = models.CharField(max_length=264)
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return str(self.first_name)

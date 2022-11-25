@@ -20,5 +20,7 @@ from shopping_app import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('test/', views.test, name='test')
+    path('test/', views.test, name='test'),
+    path('register/', views.userform, name='register'),
+    path('shopping_list/', views.shopping_list, name='shopping_list')
 ]
