@@ -1,7 +1,17 @@
 from django import forms
-from shopping_app.models import Item, User
+from django.contrib.auth.models import User
+from shopping_app.models import Item, User, UserProfileInfo
 
-class NewUserForm(forms.ModelForm):
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('username', 'email', 'password')
+
+
+class UserProfileInfoForm(forms.ModelForm):
+    class Meta:
+        model = UserProfileInfo
+        fields = ('favorite_shopping_site', 'profile_pic')
+

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -26,10 +27,22 @@ class Item(models.Model):
         return self.item_name
 
 
-class User(models.Model):
-    first_name = models.CharField(max_length=264)
-    last_name = models.CharField(max_length=264)
-    email = models.EmailField(unique=True)
+# class User(models.Model):
+#     first_name = models.CharField(max_length=264)
+#     last_name = models.CharField(max_length=264)
+#     email = models.EmailField(unique=True)
+#
+#     def __str__(self):
+#         return str(self.first_name)
+
+
+class UserProfileInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    #aditional
+    favorite_shopping_site = models.URLField(blank=True)
+
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
 
     def __str__(self):
-        return str(self.first_name)
+        return self.user.username

@@ -18,9 +18,14 @@ Including another URLconf
 from django.urls import include, path, re_path
 from shopping_app import views
 
+#template tagging
+app_name = 'shopping_app'
+
 urlpatterns = [
     path('', views.index, name='index'),
-    path('test/', views.test, name='test'),
-    path('register/', views.userform, name='register'),
-    path('shopping_list/', views.shopping_list, name='shopping_list')
+    path('shopping_list/', views.shopping_list, name='shopping_list'),
+    path('register/', views.register, name='register'),
+    path('user_login/', views.user_login, name='user_login'),
+    path('user_logout/', views.user_logout, name='user_logout'),
+
 ]
