@@ -8,6 +8,7 @@ from shopping_app.models import User, Item, User
 from shopping_app.forms import UserForm, UserProfileInfoForm
 # Create your views here.
 
+
 def index(request):
     context_dict = {'text' : 'hello ppl',
                     'number':100
@@ -15,11 +16,11 @@ def index(request):
     return render(request, 'shopping_app/index.html', context=context_dict)
 
 
-
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('index'))
+    return render(request, 'shopping_app/index.html', {})
+
 
 def register(request):
     registered = False
@@ -68,7 +69,8 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('shopping_list'))
+                return render(request, 'shopping_app/shopping_list.html', {})
+
 
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
@@ -79,7 +81,7 @@ def user_login(request):
     else:
         return render(request, 'shopping_app/login.html', {})
 
-    return render(request, 'shopping_app/login.html')
+    return render(request, 'shopping_app/login.html', {})
 
 @login_required
 def shopping_list(request):

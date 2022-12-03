@@ -19,5 +19,6 @@ from shopping_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('shopping_app/', include('shopping_app.urls', namespace="shopping_app")),
     path('', include('shopping_app.urls')),
 ]
