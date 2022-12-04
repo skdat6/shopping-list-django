@@ -1,0 +1,34 @@
+{% extends "shopping_app/base.html" %}
+
+{% block body_block %}
+
+
+<div class="row">
+            <div class="col-lg-5 mx-auto">
+                <div class="card rounded border-0 shadow-sm position-relative">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4 pb-4 border-bottom">
+                            <div class="ms-3">
+                                {% if not form.instance.pk %}
+                                <h4 class="text-uppercase fw-weight-bold mb-0">Add Item</h4>
+                                {% else %}
+                                <h4 class="text-uppercase fw-weight-bold mb-0">Edit Item</h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            {% if not form.instance.pk %}
+                            <button type="submit" class="btn btn-secondary">Add Item</button></li>
+                            {% else %}
+                            <button type="submit" class="btn btn-secondary">Edit Item</button></li>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+{% endblock %}

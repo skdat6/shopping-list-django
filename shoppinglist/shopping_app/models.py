@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -26,6 +27,10 @@ class Item(models.Model):
 
     def __str__(self):
         return self.item_name
+
+    def get_absolute_url(self):
+        return reverse("shopping_app:detail", kwargs={'pk':self.pk})
+
 
 
 # class User(models.Model):

@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import View, TemplateView, ListView, DetailView
-from django.urls import reverse
+from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from . import models
@@ -8,6 +7,17 @@ from django.contrib.auth import authenticate, login, logout
 from shopping_app.models import User, Item, User
 from shopping_app.forms import UserForm, UserProfileInfoForm
 # Create your views here.
+
+
+class ItemCreateView(CreateView):
+    model = models.Item
+    fields = ('item_name', 'category', 'price')
+
+
+class ItemUpdateView(UpdateView):
+    model = models.Item
+    fields = ('item_name', 'category', 'price')
+
 
 class ItemListView(ListView):
     model = models.Item
