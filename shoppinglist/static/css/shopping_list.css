@@ -1,0 +1,35 @@
+.status-msg {
+padding-left: 15px;
+}
+
+.item-list {
+padding-top: 20px;
+padding-bottom: 20px;
+}
+
+.box:checked + label {
+  text-decoration: line-through;
+  color: #adb5bd;
+}
+
+
+.btn-edit {
+margin-right: 50px;
+background-color: green;
+color: white;
+}
+
+.btn-delete {
+background-color: red;
+margin-left: 50px;
+color: white;
+
+}
+
+.price-info {
+color:teal;
+font-weight: bold;
+
+body {
+padding-left: 1%;
+}

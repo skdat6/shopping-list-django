@@ -1,0 +1,48 @@
+{% extends "shopping_app/base.html" %}
+    {% block body_block %}
+
+   <ol>
+    <div class="row">
+            <div class="col-lg-5 mx-auto">
+
+                <!-- CHECKBOX LIST -->
+                <div class="card rounded border-0 shadow-sm position-relative">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4 pb-4 border-bottom"><i class="far fa-calendar-alt fa-3x"></i>
+                            <div class="ms-3">
+                                <h4 class="text-uppercase fw-weight-bold mb-0">{{item.user}}'s Shopping List</h4>
+                            </div>
+                        </div>
+                        {% if not item_list  %}
+                        <p class="status-msg">Shopping List is empty. </p>
+                        {% endif %}
+
+                        {% for item in item_list %}
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input box" type="checkbox" >
+
+                            <label class="form-check-label" ><span class="fst-italic pl-1">{{item.item_name}} - {{item.category}} - {{item.price}} </span></label>
+                            <a class="btn-delete btn-primary btn-sm rounded-1 bi bi-journal-x float-right" title="Delete" href="#"></a>
+                            <a class="btn-edit btn-primary btn-sm rounded-1 bi bi-pencil-square float-right" title="Edit" href="#"></a>
+
+                        </div>
+
+                        {% endfor %}
+
+                        <div class="price-info mt-5 d-flex justify-content-center">
+                            Total to spend:  EUR
+                        </div>
+
+                    </div>
+                       <a class="btn btn-info" href="#">Add New Item</a>
+                </div>
+            </div>
+        </div>
+
+    {% for item in item_list %}
+       <li><a href="{{item.id}}">{{ item.item_name }} - {{ item.price }} - {{item.user}}</a></li>
+    {% endfor %}
+</ol>
+
+    {% endblock %}
