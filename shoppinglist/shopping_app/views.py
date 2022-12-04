@@ -1,19 +1,36 @@
 from django.shortcuts import render
+from django.views.generic import View, TemplateView, ListView, DetailView
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-
+from . import models
 from django.contrib.auth import authenticate, login, logout
 from shopping_app.models import User, Item, User
 from shopping_app.forms import UserForm, UserProfileInfoForm
 # Create your views here.
 
+class ItemListView(ListView):
+    model = models.Item
 
-def index(request):
-    context_dict = {'text' : 'hello ppl',
-                    'number':100
-                    }
-    return render(request, 'shopping_app/index.html', context=context_dict)
+class ItemDetailView(DetailView):
+    context_object_name = "item_detail"
+    model = models.Item
+    template_name = "shopping_app/item_detail.html"
+
+class IndexView(TemplateView):
+    template_name = 'shopping_app/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['injectme'] = 'BASIC INJECTION'
+        return context
+
+
+# def index(request):
+#     context_dict = {'text' : 'hello ppl',
+#                     'number':100
+#                     }
+#     return render(request, 'shopping_app/index.html', context=context_dict)
 
 
 @login_required
