@@ -1,0 +1,14 @@
+{% extends "shopping_app/base.html" %}
+
+{% block body_block %}
+
+<h1>Delete {{item.item_name}} ?</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete">
+    <a href="{% url 'shopping_app:detail' pk=item.pk %}">Cancel</a>
+
+</form>
+
+{% endblock %}

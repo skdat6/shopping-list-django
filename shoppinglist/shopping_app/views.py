@@ -3,29 +3,37 @@ from django.views.generic import View, TemplateView, ListView, DetailView, Creat
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from . import models
+from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from shopping_app.models import User, Item, User
 from shopping_app.forms import UserForm, UserProfileInfoForm
 # Create your views here.
 
-
+#CREATE ITEM VIEW
 class ItemCreateView(CreateView):
     model = models.Item
     fields = ('item_name', 'category', 'price')
 
-
+#UPDATE ITEM VIEW
 class ItemUpdateView(UpdateView):
     model = models.Item
     fields = ('item_name', 'category', 'price')
+
+#DELETE ITEM VIEW
+class ItemDeleteView(DeleteView):
+    model = models.Item
+    success_url = reverse_lazy("shopping_app:list")
 
 
 class ItemListView(ListView):
     model = models.Item
 
+
 class ItemDetailView(DetailView):
     context_object_name = "item_detail"
     model = models.Item
     template_name = "shopping_app/item_detail.html"
+
 
 class IndexView(TemplateView):
     template_name = 'shopping_app/index.html'

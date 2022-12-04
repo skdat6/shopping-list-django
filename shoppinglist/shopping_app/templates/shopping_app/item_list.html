@@ -23,7 +23,7 @@
                             <input class="form-check-input box" type="checkbox" >
 
                             <label class="form-check-label" ><span class="fst-italic pl-1">{{item.item_name}} - {{item.category}} - {{item.price}} </span></label>
-                            <a class="btn-delete btn-primary btn-sm rounded-1 bi bi-journal-x float-right" title="Delete" href="#"></a>
+                            <a class="btn-delete btn-primary btn-sm rounded-1 bi bi-journal-x float-right" title="Delete" href="{% url 'shopping_app:delete' pk=item.pk %}"></a>
                             <a class="btn-edit btn-primary btn-sm rounded-1 bi bi-pencil-square float-right" title="Edit" href="{% url 'shopping_app:edit' pk=item.pk %}"></a>
 
                         </div>
