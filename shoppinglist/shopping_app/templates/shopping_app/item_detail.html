@@ -7,7 +7,7 @@
     <h1>Item list detail</h1>
     <p> Name: {{item_detail.item_name}}</p>
     <p> Category: {{item_detail.category}}</p>
-
+    <a class="btn-edit btn-primary btn-sm rounded-1 bi bi-pencil-square float-right" title="Edit" href="{% url 'shopping_app:edit' pk=item_detail.pk %}" ></a>
 </div>
 
 {% endblock %}
