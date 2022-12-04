@@ -5,25 +5,28 @@
 
 <div class="jumbotron">
     {% if registered %}
-
     <h1> Thank you for registering</h1>?
     {% else %}
-    <h1> Register here!</h1>
-    <h3> FIll out the form:</h3>
-
-    <form method = "post" enctype="multipart/form-data">
-
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-
-        <input type="submit" value="Register">
-
-    </form>
-
-    {% endif %}
+    <div class="register_form_wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+						<!-- register -->
+						<div class="register_wrapper">
+							<h2>Register a new account</h2>
+							<form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ user_form.as_p }}
+                                {{ profile_form.as_p }}
+                                <input type="submit" class="btn btn-primary register" value="Sign Up">
+                            </form>
+						</div>
+					</div>
+				</div>
+			</div>
+    </div>
 </div>
-
+    {% endif %}
 {% endblock %}
 
 

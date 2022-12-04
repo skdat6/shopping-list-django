@@ -3,7 +3,7 @@ from django.views.generic import View, TemplateView, ListView, DetailView, Creat
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from . import models
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
 from shopping_app.models import User, Item, User
 from shopping_app.forms import UserForm, UserProfileInfoForm
@@ -23,6 +23,7 @@ class ItemUpdateView(UpdateView):
 class ItemDeleteView(DeleteView):
     model = models.Item
     success_url = reverse_lazy("shopping_app:list")
+
 
 
 class ItemListView(ListView):
@@ -104,7 +105,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return render(request, 'shopping_app/shopping_list.html', {})
+                return HttpResponseRedirect(reverse("list"))
 
 
             else:
@@ -116,13 +117,13 @@ def user_login(request):
     else:
         return render(request, 'shopping_app/login.html', {})
 
-    return render(request, 'shopping_app/login.html', {})
+    return render(request, 'shopping_app/item_list.html', {})
 
 @login_required
 def shopping_list(request):
     users = User.objects.order_by('first_name')
     context_dict = {
-        'user' : users,
+        'user': users,
     }
     return render(request, 'shopping_app/shopping_list.html', context=context_dict)
 

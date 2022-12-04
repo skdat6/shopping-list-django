@@ -19,7 +19,8 @@ from shopping_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shopping_app/', include('shopping_app.urls', namespace="default")),
+    path('', include('shopping_app.urls', namespace=None)),
     path('', views.IndexView.as_view(), name='index'),
+    path('item_list/', views.ItemListView.as_view(), name='list'),
 
 ]
