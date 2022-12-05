@@ -15,3 +15,10 @@ class UserProfileInfoForm(forms.ModelForm):
         model = UserProfileInfo
         fields = ('favorite_shopping_site', 'profile_pic')
 
+
+class ItemForm(forms.ModelForm):
+
+    class Meta:
+        model = Item
+        fields = ('item_name', 'category', 'price')
+

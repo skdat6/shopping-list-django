@@ -1,4 +1,7 @@
 {% extends "shopping_app/base.html" %}
+{% load extra_templates %}
+
+
 
 {% block body_block %}
 <ol>
@@ -10,25 +13,30 @@
                     <div class="card-body p-5">
                         <div class="d-flex align-items-center mb-4 pb-4 border-bottom"><i class="far fa-calendar-alt fa-3x"></i>
                             <div class="ms-3">
-                                <h4 class="text-uppercase fw-weight-bold mb-0">{{user.username}}'s Shopping List</h4>
+                                <h4 class="text-uppercase fw-weight-bold mb-0">{{user.username.lower}}'s Shopping List</h4>
                             </div>
                         </div>
-                        {% if not item_list  %}
-                        <p class="status-msg">Shopping List is empty. </p>
+
+                        {% if item_list %}
+                            {% for item in item_list %}
+                                {% if item.user|to_str == user.username|to_str %}
+
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input box" type="checkbox" >
+
+                                        <label class="form-check-label" ><span class="fst-italic pl-1">{{item.item_name}} - {{item.category}} - {{item.price}} </span></label>
+                                        <a class="btn-delete btn-primary btn-sm rounded-1 bi bi-journal-x float-right" title="Delete" href="{% url 'shopping_app:delete' pk=item.pk %}"></a>
+                                        <a class="btn-edit btn-primary btn-sm rounded-1 bi bi-pencil-square float-right" title="Edit" href="{% url 'shopping_app:edit' pk=item.pk %}"></a>
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% endfor %}
                         {% endif %}
 
-                        {% for item in item_list %}
 
-                        <div class="form-check mb-3">
-                            <input class="form-check-input box" type="checkbox" >
 
-                            <label class="form-check-label" ><span class="fst-italic pl-1">{{item.item_name}} - {{item.category}} - {{item.price}} </span></label>
-                            <a class="btn-delete btn-primary btn-sm rounded-1 bi bi-journal-x float-right" title="Delete" href="{% url 'shopping_app:delete' pk=item.pk %}"></a>
-                            <a class="btn-edit btn-primary btn-sm rounded-1 bi bi-pencil-square float-right" title="Edit" href="{% url 'shopping_app:edit' pk=item.pk %}"></a>
-
-                        </div>
-
-                        {% endfor %}
 
                         <div class="price-info mt-5 d-flex justify-content-center">
                             Total to spend:  EUR

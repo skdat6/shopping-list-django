@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
@@ -14,10 +15,15 @@ class ItemCreateView(CreateView):
     model = models.Item
     fields = ('item_name', 'category', 'price')
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 #UPDATE ITEM VIEW
-class ItemUpdateView(UpdateView):
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Item
     fields = ('item_name', 'category', 'price')
+
 
 #DELETE ITEM VIEW
 class ItemDeleteView(DeleteView):
@@ -28,6 +34,9 @@ class ItemDeleteView(DeleteView):
 
 class ItemListView(ListView):
     model = models.Item
+
+    def get_queryset(self):
+        return Item.objects.all()
 
 
 class ItemDetailView(DetailView):
