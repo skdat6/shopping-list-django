@@ -12,4 +12,10 @@ def cut(value, arg):
     return value.replace(arg, '')
 
 
-#register.filter('cut', cut)
+@register.filter
+def to_str(value):
+    """
+    Function convers value to string
+    """
+    return str(value)
+
