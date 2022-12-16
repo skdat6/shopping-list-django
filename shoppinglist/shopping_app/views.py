@@ -11,7 +11,7 @@ from shopping_app.forms import UserForm, UserProfileInfoForm
 # Create your views here.
 
 #CREATE ITEM VIEW
-class ItemCreateView(CreateView):
+class ItemCreateView(LoginRequiredMixin, CreateView):
     model = models.Item
     fields = ('item_name', 'category', 'price')
 
@@ -26,20 +26,20 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
 
 
 #DELETE ITEM VIEW
-class ItemDeleteView(DeleteView):
+class ItemDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Item
     success_url = reverse_lazy("shopping_app:list")
 
 
 
-class ItemListView(ListView):
+class ItemListView(LoginRequiredMixin, ListView):
     model = models.Item
 
     def get_queryset(self):
         return Item.objects.all()
 
 
-class ItemDetailView(DetailView):
+class ItemDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "item_detail"
     model = models.Item
     template_name = "shopping_app/item_detail.html"

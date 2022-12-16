@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -13,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/shopping_list.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 </head>
 
 <body>
@@ -20,9 +22,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto">
+         {% if user.is_authenticated %}
            <li class="nav-item">
         <a class="nav-link" href="{% url 'shopping_app:list' %}">Items</a>
-      </li>
+           </li>
+         {% endif %}
         <li class="nav-item">
         <a class="nav-link" href="{% url 'shopping_app:register' %}">Register</a>
       </li>
