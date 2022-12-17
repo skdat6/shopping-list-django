@@ -9,6 +9,7 @@
     <p> Category: {{item_detail.category}}</p>
         {{item_detail.user}}
     <a class="btn-edit btn-primary btn-sm rounded-1 bi bi-pencil-square float-right" title="Edit" href="{% url 'shopping_app:edit' pk=item_detail.pk %}" ></a>
+    <a class="btn-delete btn-primary btn-sm rounded-1 bi bi-journal-x float-right" title="Delete" href="{% url 'shopping_app:delete' pk=item_detail.pk %}"></a>
 </div>
 
 {% endblock %}

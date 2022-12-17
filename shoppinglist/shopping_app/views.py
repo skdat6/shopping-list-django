@@ -8,10 +8,12 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
 from shopping_app.models import User, Item, User
 from shopping_app.forms import UserForm, UserProfileInfoForm
-# Create your views here.
 
-#CREATE ITEM VIEW
+
+# CREATE ITEM VIEW
 class ItemCreateView(LoginRequiredMixin, CreateView):
+    success_url = '/item_list/'
+
     model = models.Item
     fields = ('item_name', 'category', 'price')
 
@@ -19,17 +21,17 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-#UPDATE ITEM VIEW
+
+# UPDATE ITEM VIEW
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Item
     fields = ('item_name', 'category', 'price')
 
 
-#DELETE ITEM VIEW
+# DELETE ITEM VIEW
 class ItemDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Item
     success_url = reverse_lazy("shopping_app:list")
-
 
 
 class ItemListView(LoginRequiredMixin, ListView):
@@ -52,13 +54,6 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['injectme'] = 'BASIC INJECTION'
         return context
-
-
-# def index(request):
-#     context_dict = {'text' : 'hello ppl',
-#                     'number':100
-#                     }
-#     return render(request, 'shopping_app/index.html', context=context_dict)
 
 
 @login_required
@@ -102,7 +97,6 @@ def register(request):
                                                           'registered': registered})
 
 
-
 def user_login(request):
 
     if request.method == 'POST':
@@ -116,7 +110,6 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse("list"))
 
-
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
         else:
@@ -127,6 +120,7 @@ def user_login(request):
         return render(request, 'shopping_app/login.html', {})
 
     return render(request, 'shopping_app/item_list.html', {})
+
 
 @login_required
 def shopping_list(request):
